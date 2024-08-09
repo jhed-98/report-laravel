@@ -24,4 +24,6 @@ Route::prefix('/invoices')->middleware([
 ])->group(function () {
     Route::get('/export', [InvoiceController::class, 'export'])->name('invoices.export');
     Route::get('/import', [InvoiceController::class, 'import'])->name('invoices.import');
+    // Route::post('/import/store', [InvoiceController::class, 'importStore'])->name('invoices.importStore');
+    Route::post('/import/store', [InvoiceController::class, 'importStoreFile'])->name('invoices.importStore');
 });

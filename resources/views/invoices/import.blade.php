@@ -7,9 +7,25 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
 
-            </div>
+            @if (session()->has('message'))
+                @include('invoices.alert')
+            @endif
+
+            <form action="{{ route('invoices.importStore') }}" method="POST" class="bg-white rounded p-8 shadow"
+                enctype="multipart/form-data">
+                @csrf
+                <x-validation-errors class="mb-4" />
+                <div>
+                    <h1 class="text-2xl font-semibold mb-4">
+                        Por favor seleccione el archivo que quiere importar
+                    </h1>
+                    <input type="file" name="file" accept=".csv,.xlsx">
+                </div>
+                <x-button class="mt-4">
+                    Importar archivo
+                </x-button>
+            </form>
         </div>
     </div>
 </x-app-layout>

@@ -21,6 +21,10 @@ class FilterInvoices extends Component
         'toDate' => '',
     ];
 
+    public function limpiar(){
+        $this->reset();
+    }
+
     public function generarReport()
     {
         //! Formato de exportación predeterminada del excel
