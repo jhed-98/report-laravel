@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     ///Relaciones
     //uno a muchos
-    public function invoice()
+    public function invoices()
     {
         return $this->hasMany(User::class);
     }

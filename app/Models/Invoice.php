@@ -17,10 +17,29 @@ class Invoice extends Model
         'total',
         'user_id'
     ];
+    //Query Scopes
+    public function scopeFilter($query, $filters)
+    {
+        $query->when($filters['serie'] ?? null, function ($query, $serie) {
+            $query->where('serie', 'like', '%' . $serie . '%');
+        });
+        $query->when($filters['fromNumber'] ?? null, function ($query, $fromNumber) {
+            $query->where('correlative', '>=', $fromNumber);
+        });
+        $query->when($filters['toNumber'] ?? null, function ($query, $toNumber) {
+            $query->where('correlative', '<=', $toNumber);
+        });
+        $query->when($filters['fromDate'] ?? null, function ($query, $fromDate) {
+            $query->where('created_at', '>=', $fromDate);
+        });
+        $query->when($filters['toDate'] ?? null, function ($query, $toDate) {
+            $query->where('created_at', '<=', $toDate);
+        });
+    }
 
-    ///Relaciones
+    //Relaciones
     //uno a muchos - inversa
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
